@@ -1,3 +1,5 @@
+import sys
+sys.path.append("..")
 from ElaphurusPGM.Model import BayesianModel
 from ElaphurusPGM.VE import VariableElimination
 from ElaphurusPGM.CPD import CPD
