@@ -11,7 +11,7 @@ class BayesianModel(nx.DiGraph):
     def add_edge(self, e_from, e_end, weight):
         super(BayesianModel, self).add_edge(e_from, e_end, weight=weight)
 
-    def add_cpds(self, *cpds):
+    def add_cpds(self, cpds):
         self.cpds = cpds
 
     def get_cpds(self, node=None):

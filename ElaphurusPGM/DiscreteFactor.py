@@ -10,7 +10,7 @@ class DiscreteFactor(object):
         self.variables = list(variables)
         self.values = np.array(values, dtype=np.float)
         self.cardinality = np.array(cardinality,dtype=np.int)
-        self.values = values.reshape(self.cardinality)
+        self.values = self.values.reshape(self.cardinality)
 
     def deepcopy(self):
         return copy.deepcopy(self)
@@ -50,8 +50,9 @@ class DiscreteFactor(object):
         normalize the whole factor
         '''
         phi = self if inplace else self.deepcopy()
-        phi.values = phi.values / phi.values.sum()
-
+        oldshape = phi.values.shape
+        phi.values = phi.values.reshape(-1,phi.values.shape[-1]) / phi.values.sum(-1).flatten().reshape(-1,1)
+        phi.values = phi.values.reshape(oldshape)
         if not inplace:
             return phi
 
